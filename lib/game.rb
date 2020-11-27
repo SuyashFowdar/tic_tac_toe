@@ -31,7 +31,7 @@ class Game
     !@first_d.nil? && !@second_d.nil?
   end
 
-  def square_filled?
+  def square_empty?
     @play[@first_d][@second_d] != 'x' && @play[@first_d][@second_d] != 'o'
   end
 

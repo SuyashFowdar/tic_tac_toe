@@ -35,7 +35,7 @@ def game_flow(game, player1, player2)
   game.update_d(input)
   return 'Wrong value entered! Please try again!' unless game.move_valid?
 
-  return 'This square is already filled! Please try again!' unless game.square_filled?
+  return 'This square is already filled! Please try again!' unless game.square_empty?
 
   game.play_move
   if game.game_won?
