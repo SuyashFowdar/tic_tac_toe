@@ -14,6 +14,43 @@ describe Game do
       expect(game.input_valid?('a22')).to eql(false)
     end
   end
+  describe '#Winning possibilities set' do
+    it 'Check if all set are empty' do
+      expect(game.winning_possibilities).to eql([[' ', ' ', ' '],
+                                                 [' ', ' ', ' '],
+                                                 [' ', ' ', ' '],
+                                                 [' ', ' ', ' '],
+                                                 [' ', ' ', ' '],
+                                                 [' ', ' ', ' '],
+                                                 [' ', ' ', ' '],
+                                                 [' ', ' ', ' ']])
+    end
+    it 'Check if the sets contain b1' do
+      game.current_player = Player.new('1', 'o')
+      game.first_d = nil
+      game.second_d = nil
+      game.update_d('b1')
+      game.play_move
+      expect(game.winning_possibilities).to eql([[' ', ' ', ' '],
+                                                 ['o', ' ', ' '],
+                                                 [' ', ' ', ' '],
+                                                 [' ', 'o', ' '],
+                                                 [' ', ' ', ' '],
+                                                 [' ', ' ', ' '],
+                                                 [' ', ' ', ' '],
+                                                 [' ', ' ', ' ']])
+    end
+  end
+  describe '#Update array first and second dimensions' do
+    it 'Update b2' do
+      game.current_player = Player.new('1', 'o')
+      game.first_d = nil
+      game.second_d = nil
+      game.update_d('b2')
+      game.play_move
+      expect(game.play[1][1]).to eql('o')
+    end
+  end
   describe '#Valid move' do
     it 'Check if a1 is a valid move' do
       game.first_d = nil
@@ -32,6 +69,17 @@ describe Game do
       game.second_d = nil
       game.update_d('d3')
       expect(game.move_valid?).to eql(false)
+    end
+  end
+  describe '#Play move' do
+    it 'Play move c2' do
+      game.current_player = Player.new('1', 'o')
+      game.first_d = nil
+      game.second_d = nil
+      game.update_d('c2')
+      game.play_move
+      expect(game.play[2][1]).to eql('o')
+      expect(game.move_num).to eql(4)
     end
   end
   describe '#Filled square' do
@@ -59,6 +107,13 @@ describe Game do
       game.update_d('a3')
       game.play_move
       expect(game.game_won?).to eql(true)
+    end
+  end
+  describe '#Player' do
+    it 'Creates Player John with symbol x' do
+      player = Player.new('John', 'x')
+      expect(player.name).to eql('John')
+      expect(player.symbol).to eql('x')
     end
   end
 end
