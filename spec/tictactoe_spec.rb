@@ -109,10 +109,15 @@ describe Game do
       expect(game.game_won?).to eql(true)
     end
   end
+end
+
+describe Player do
+  player = Player.new('John', 'x')
   describe '#Player' do
     it 'Creates Player John with symbol x' do
-      player = Player.new('John', 'x')
       expect(player.name).to eql('John')
+    end
+    it 'Creates Player John with symbol x' do
       expect(player.symbol).to eql('x')
     end
   end
